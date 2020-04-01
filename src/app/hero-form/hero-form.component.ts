@@ -13,7 +13,7 @@ export class HeroFormComponent {
     'Super Hot', 'Weather Changer',
   ];
 
-  model = new Hero(18, 'Dr IQ', this.powers[0], 'Chunk Overstreet');
+  model = new Hero(18, '', this.powers[0], 'Chunk Overstreet');
 
   submitted = false;
 

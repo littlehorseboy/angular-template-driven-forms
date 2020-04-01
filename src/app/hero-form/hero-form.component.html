@@ -6,7 +6,7 @@
       <div class="form-group">
         <label for="name">Name</label>
         <input
-          #name="ngModel"
+          #nameRef="ngModel"
           [(ngModel)]="model.name"
           name="name"
           id="name"
@@ -14,10 +14,12 @@
           required
         />
         <div
-          [hidden]="name.valid || name.pristine"
+          [hidden]="!(nameRef.invalid && (nameRef.dirty || nameRef.touched))"
           class="alert alert-danger"
         >
-          Name is required
+          <div *ngIf="nameRef.errors.required">
+            Name is required
+          </div>
         </div>
       </div>
 
@@ -34,6 +36,7 @@
       <div class="form-group">
         <label for="power">Hero Power</label>
         <select
+          #powerRef="ngModel"
           [(ngModel)]="model.power"
           name="power"
           id="power"
@@ -44,6 +47,14 @@
             {{ power }}
           </option>
         </select>
+        <div
+          [hidden]="!(powerRef.invalid && (powerRef.dirty || powerRef.touched))"
+          class="alert alert-danger"
+        >
+          <div *ngIf="powerRef.errors?.required">
+            Hero Power is required
+          </div>
+        </div>
       </div>
 
       <button
