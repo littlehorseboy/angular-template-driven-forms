@@ -4,7 +4,23 @@
   <form>
     <div class="form-group">
       <label for="name">Name</label>
-      <input id="name" class="form-control" required />
+      <input
+        [(ngModel)]="model.name"
+        name="name"
+        id="name"
+        class="form-control"
+        required
+      />
+      {{ model.name }}
+    </div>
+
+    <div class="form-group">
+      <label for="alterEgo">Alter Ego</label>
+      <select id="power" class="form-control" required>
+        <option *ngFor="let power of powers" [value]="power">
+          {{ power }}
+        </option>
+      </select>
     </div>
 
     <div class="form-group">
