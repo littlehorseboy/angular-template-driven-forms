@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Hero Form</h1>
 
-  <form>
+  <form #heroForm="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -16,16 +16,27 @@
 
     <div class="form-group">
       <label for="alterEgo">Alter Ego</label>
-      <select id="power" class="form-control" required>
+      <input
+        [(ngModel)]="model.alterEgo"
+        name="alterEgo"
+        id="alterEgo"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="power">Hero Power</label>
+      <select
+        [(ngModel)]="model.power"
+        name="power"
+        id="power"
+        class="form-control"
+        required
+      >
         <option *ngFor="let power of powers" [value]="power">
           {{ power }}
         </option>
       </select>
-    </div>
-
-    <div class="form-group">
-      <label for="alterEgo">Alter Ego</label>
-      <input id="alterEgo" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
