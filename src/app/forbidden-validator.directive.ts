@@ -1,5 +1,5 @@
-import { Directive } from '@angular/core';
-import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { Directive, Input } from '@angular/core';
+import { ValidatorFn, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 
 export function forbiddenValidator(nameRe: RegExp): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -9,10 +9,19 @@ export function forbiddenValidator(nameRe: RegExp): ValidatorFn {
 }
 
 @Directive({
-  selector: '[appForbiddenValidator]'
+  selector: '[appForbiddenValidator]',
+  providers: [{
+    provide: NG_VALIDATORS,
+    useExisting: ForbiddenValidatorDirective,
+    multi: true,
+  }],
 })
 export class ForbiddenValidatorDirective {
+  @Input('appForbiddenValidator') forbiddenString: string;
 
-  constructor() { }
-
+  validate(control: AbstractControl): { [key: string]: any } | null {
+    return this.forbiddenString
+      ? forbiddenValidator(new RegExp(this.forbiddenString, 'i'))(control)
+      : null;
+  }
 }

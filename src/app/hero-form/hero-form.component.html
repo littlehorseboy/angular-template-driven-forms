@@ -13,6 +13,7 @@
           class="form-control"
           required
           minlength="4"
+          appForbiddenValidator="Otis"
         />
         <div
           [hidden]="!(nameRef.invalid && (nameRef.dirty || nameRef.touched))"
@@ -23,6 +24,9 @@
           </div>
           <div *ngIf="nameRef.errors.minlength">
             Name must be at least 4 characters long
+          </div>
+          <div *ngIf="nameRef.errors.forbidden">
+            Name cannot be Otis.
           </div>
         </div>
       </div>
