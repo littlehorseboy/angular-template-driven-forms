@@ -2,7 +2,7 @@
   <div [hidden]="submitted">
     <h1>Hero Form</h1>
 
-    <form #heroForm="ngForm" (ngSubmit)="onSubmit()">
+    <form #heroForm="ngForm" (ngSubmit)="onSubmit()" appIdentityRevealedValidator>
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -19,15 +19,21 @@
           [hidden]="!(nameRef.invalid && (nameRef.dirty || nameRef.touched))"
           class="alert alert-danger"
         >
-          <div *ngIf="nameRef.errors.required">
+          <div *ngIf="nameRef.errors?.required">
             Name is required
           </div>
-          <div *ngIf="nameRef.errors.minlength">
+          <div *ngIf="nameRef.errors?.minlength">
             Name must be at least 4 characters long
           </div>
-          <div *ngIf="nameRef.errors.forbidden">
+          <div *ngIf="nameRef.errors?.forbidden">
             Name cannot be Otis.
           </div>
+        </div>
+        <div
+          *ngIf="heroForm.errors?.identityRevealed && (heroForm.touched || heroForm.dirty)"
+          class="alert alert-danger"
+        >
+          Name cannot match alter ego.
         </div>
       </div>
 
