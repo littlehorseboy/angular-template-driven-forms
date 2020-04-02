@@ -42,6 +42,7 @@
         <input
           #alterEgoRef="ngModel"
           [(ngModel)]="model.alterEgo"
+          [ngModelOptions]="{ updateOn: 'blur' }"
           appUniqueAlterEgoValidator
           name="alterEgo"
           id="alterEgo"
