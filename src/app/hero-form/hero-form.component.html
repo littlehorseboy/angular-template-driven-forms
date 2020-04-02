@@ -40,11 +40,19 @@
       <div class="form-group">
         <label for="alterEgo">Alter Ego</label>
         <input
+          #alterEgoRef="ngModel"
           [(ngModel)]="model.alterEgo"
+          appUniqueAlterEgoValidator
           name="alterEgo"
           id="alterEgo"
           class="form-control"
         />
+        <div *ngIf="alterEgoRef.pending">Validating...</div>
+        <div *ngIf="alterEgoRef.invalid" class="alert alert-danger">
+          <div *ngIf="!alterEgoRef.errors?.isUnique">
+            Alter Ego is already taken
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
